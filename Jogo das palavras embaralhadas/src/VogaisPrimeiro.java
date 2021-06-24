@@ -4,33 +4,28 @@ public class VogaisPrimeiro implements Embaralhador {
 	private String palavra;
 	
 	public VogaisPrimeiro(String palavra){
-		this.palavra = palavra;
+		this.palavra = palavra.toLowerCase();
 	}
-	
+
 	@Override
 	public String EmbaralharPalavra() {
 		char[] palavraChar = palavra.toCharArray();
-		String palavraEmbaralhada = "";
-		
-		for (int i=0;i<palavra.length();i++){
-			if (palavraChar[i] == 'a' || palavraChar[i] == 'A' ||
-				palavraChar[i] == 'e' || palavraChar[i] == 'E' ||
-				palavraChar[i] == 'i' || palavraChar[i] == 'I' ||
-				palavraChar[i] == 'o' || palavraChar[i] == 'O' ||
-				palavraChar[i] == 'u' || palavraChar[i] == 'U' )
-					palavraEmbaralhada += palavraChar[i];
+		String vogais = "", consoantes = ""; 
+			
+		for (int i=0; i < palavra.length(); i++) {
+			if (this.identificaVogal(palavraChar[i])) {
+				vogais += palavraChar[i];				
+			} else {
+				consoantes += palavraChar[i]; 
+			}
 		}
-		
-		for (int i=0;i<palavra.length();i++){
-			if (palavraChar[i] != 'a' && palavraChar[i] != 'A' &&
-				palavraChar[i] != 'e' && palavraChar[i] != 'E' &&
-				palavraChar[i] != 'i' && palavraChar[i] != 'I' &&
-				palavraChar[i] != 'o' && palavraChar[i] != 'O' &&
-				palavraChar[i] != 'u' && palavraChar[i] != 'U' )
-					palavraEmbaralhada += palavraChar[i];
-		}
-		
-		return palavraEmbaralhada;	
+		return vogais + consoantes;
 	}
 
+	public boolean identificaVogal(char letra) {
+		if(letra == 'a' || letra == 'e' || letra == 'i' || letra == 'o' || letra == 'u')
+			return true;
+		return false;
+	}
+	
 }
